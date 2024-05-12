@@ -9,7 +9,7 @@ namespace SachHayBlog.Core.Domain.Identity
     {
         [Required]
         [MaxLength(100)]
-        public required string FullName { get; set; }
+        public required string FirstName { get; set; }
         [Required]
         [MaxLength(100)]
         public required string LastName { get; set; }
