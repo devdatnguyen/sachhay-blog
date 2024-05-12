@@ -3,13 +3,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using SachHayBlog.Api;
 using SachHayBlog.Core.Domain.Identity;
+using SachHayBlog.Core.SeedWorks;
 using SachHayBlog.Data;
+using SachHayBlog.Data.SeedWorks;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 var connectionString = configuration.GetConnectionString("DefaultConnection");
 
-// Add services to the container.
 
 //Configure DbContext with SQL Server.
 builder.Services.AddDbContext<SachHayBlogContext>(options =>
@@ -38,6 +39,9 @@ builder.Services.Configure<IdentityOptions>(options =>
       options.User.RequireUniqueEmail = false;
   });
 
+// Add services to the container.
+builder.Services.AddScoped(typeof(IRepository<,>), typeof(RepositoryBase<,>));
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 //Default config for ASP.NET Core
 builder.Services.AddControllers();
