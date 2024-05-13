@@ -3,8 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using SachHayBlog.Api;
 using SachHayBlog.Core.Domain.Identity;
+using SachHayBlog.Core.Repositories;
 using SachHayBlog.Core.SeedWorks;
 using SachHayBlog.Data;
+using SachHayBlog.Data.Repositories;
 using SachHayBlog.Data.SeedWorks;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -42,6 +44,21 @@ builder.Services.Configure<IdentityOptions>(options =>
 // Add services to the container.
 builder.Services.AddScoped(typeof(IRepository<,>), typeof(RepositoryBase<,>));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+//Bussiness services ad repositories
+var services = typeof(PostRepository).Assembly.GetTypes()
+    .Where(x => x.GetInterfaces().Any(i => i.Name == typeof(IRepository<,>).Name)
+    && !x.IsAbstract && x.IsClass && !x.IsGenericType);
+
+foreach (var service in services)
+{
+    var allInterfaces = service.GetInterfaces();
+    var directInterfaces = allInterfaces.Except(allInterfaces.SelectMany(t => t.GetInterfaces())).FirstOrDefault();
+    if (directInterfaces != null)
+    {
+        builder.Services.Add(new ServiceDescriptor(directInterfaces, service, ServiceLifetime.Scoped));
+    }
+}
 
 //Default config for ASP.NET Core
 builder.Services.AddControllers();
