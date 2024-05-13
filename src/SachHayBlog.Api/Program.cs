@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using SachHayBlog.Api;
 using SachHayBlog.Core.Domain.Identity;
+using SachHayBlog.Core.Models.Content;
 using SachHayBlog.Core.Repositories;
 using SachHayBlog.Core.SeedWorks;
 using SachHayBlog.Data;
@@ -59,6 +60,8 @@ foreach (var service in services)
         builder.Services.Add(new ServiceDescriptor(directInterfaces, service, ServiceLifetime.Scoped));
     }
 }
+
+builder.Services.AddAutoMapper(typeof(PostInListDto));
 
 //Default config for ASP.NET Core
 builder.Services.AddControllers();
