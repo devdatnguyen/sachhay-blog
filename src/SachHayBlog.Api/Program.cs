@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using SachHayBlog.Api;
+using SachHayBlog.Api.Services;
+using SachHayBlog.Core.ConfigOptions;
 using SachHayBlog.Core.Domain.Identity;
 using SachHayBlog.Core.Models.Content;
 using SachHayBlog.Core.SeedWorks;
@@ -10,6 +12,7 @@ using SachHayBlog.Data.Repositories;
 using SachHayBlog.Data.SeedWorks;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Reflection;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -62,7 +65,15 @@ foreach (var service in services)
     }
 }
 
+//AutoMapper
 builder.Services.AddAutoMapper(typeof(PostInListDto));
+
+//Authen and authorization
+builder.Services.Configure<JwtTokenSettings>(configuration.GetSection("JwtTokenSettings"));
+builder.Services.AddScoped<SignInManager<AppUser>, SignInManager<AppUser>>();
+builder.Services.AddScoped<UserManager<AppUser>, UserManager<AppUser>>();
+builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<RoleManager<AppRole>, RoleManager<AppRole>>();
 
 //Default config for ASP.NET Core
 builder.Services.AddControllers();
