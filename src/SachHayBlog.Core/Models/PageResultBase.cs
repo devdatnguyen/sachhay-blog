@@ -1,6 +1,6 @@
 ﻿namespace SachHayBlog.Core.Models
 {
-    public abstract class PgaeResultBase
+    public abstract class PageResultBase
     {
         public int CurrentPage { get; set; }
         public int PageSize { get; set; }
@@ -22,7 +22,7 @@
         public int FristRowOnPage => (CurrentPage - 1) * PageSize + 1;
         public int LastRowOnPage => Math.Min(CurrentPage * PageSize, RowCount);
         public string? AddionalData { get; set;}
-        }
 
     }
+
 }

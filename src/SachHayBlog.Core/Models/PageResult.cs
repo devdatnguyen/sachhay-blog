@@ -1,6 +1,6 @@
 ﻿namespace SachHayBlog.Core.Models
 {
-    public class PageResult<T> : PgaeResultBase where T : class
+    public class PageResult<T> : PageResultBase where T : class
     {
         public List<T> Results { get; set; }
 
