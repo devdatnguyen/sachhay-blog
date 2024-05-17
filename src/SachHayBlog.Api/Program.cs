@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using SachHayBlog.Api;
+using SachHayBlog.Api.Filters;
 using SachHayBlog.Api.Services;
 using SachHayBlog.Core.ConfigOptions;
 using SachHayBlog.Core.Domain.Identity;
@@ -12,7 +13,6 @@ using SachHayBlog.Data.Repositories;
 using SachHayBlog.Data.SeedWorks;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Reflection;
-using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
