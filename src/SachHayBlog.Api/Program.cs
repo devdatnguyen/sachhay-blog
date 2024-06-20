@@ -17,7 +17,15 @@ using System.Reflection;
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 var connectionString = configuration.GetConnectionString("DefaultConnection");
+var SHCorsPolicy = "SHCorsPolicy";
 
+builder.Services.AddCors(o => o.AddPolicy(SHCorsPolicy, builder =>
+{
+    builder.AllowAnyMethod()
+           .AllowAnyHeader()
+           .WithOrigins(configuration["AllowedOrigins"])
+           .AllowCredentials();
+}));
 
 //Configure DbContext with SQL Server.
 builder.Services.AddDbContext<SachHayBlogContext>(options =>
@@ -107,6 +115,8 @@ if (app.Environment.IsDevelopment())
         c.DisplayRequestDuration();
     });
 }
+
+app.UseCors(SHCorsPolicy);
 
 app.UseHttpsRedirection();
 

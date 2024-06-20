@@ -5199,6 +5199,11 @@ npmlog@^6.0.0:
     gauge "^4.0.3"
     set-blocking "^2.0.0"
 
+nswag@^14.0.7:
+  version "14.0.7"
+  resolved "https://registry.yarnpkg.com/nswag/-/nswag-14.0.7.tgz#c2477e1696164493a6162e03d3b23e14d43231af"
+  integrity sha512-naWbD8dQXWg+h7B/qaQZbPke4xiRUoclUPRO8ETWEgPs/RgYRUXEUHrf25KqQNbONTv5dp9aX8lD8bhgsWsRkw==
+
 nth-check@^2.0.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/nth-check/-/nth-check-2.1.1.tgz#c9eab428effce36cd6b92c924bdb000ef1f1ed1d"
@@ -5580,6 +5585,18 @@ pretty-bytes@^5.3.0:
   version "5.6.0"
   resolved "https://registry.yarnpkg.com/pretty-bytes/-/pretty-bytes-5.6.0.tgz#356256f643804773c82f64723fe78c92c62beaeb"
   integrity sha512-FFw039TmrBqFK8ma/7OL3sDz/VytdtJr044/QUJtH0wK9lb9jLq9tJyIxUwtQJHwar2BqtiA4iCWSwo9JLkzFg==
+
+primeicons@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/primeicons/-/primeicons-7.0.0.tgz#6b25c3fdcb29bb745a3035bdc1ed5902f4a419cf"
+  integrity sha512-jK3Et9UzwzTsd6tzl2RmwrVY/b8raJ3QZLzoDACj+oTJ0oX7L9Hy+XnVwgo4QVKlKpnP/Ur13SXV/pVh4LzaDw==
+
+primeng@^17.17.0:
+  version "17.17.0"
+  resolved "https://registry.yarnpkg.com/primeng/-/primeng-17.17.0.tgz#8a7bb84b4baf730049f01dd97ada03bb052f1b01"
+  integrity sha512-+lIfG2nVve5GJQXGBDi2YeVabg6E9RmG67LDw9Ol8XvMWuHwJXQAGfO+AKPhPPzFSdb1j2v44uJemuNcJLXUiw==
+  dependencies:
+    tslib "^2.3.0"
 
 proc-log@^3.0.0:
   version "3.0.0"
