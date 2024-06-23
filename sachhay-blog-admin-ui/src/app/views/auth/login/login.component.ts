@@ -3,7 +3,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { AdminApiAuthApiClient, AuthenticatedResult, LoginRequest } from 'src/app/api/admin-api.service.generated';
 import { AlertService } from 'src/app/shared/services/alert.service';
-
+import { UrlConstants } from 'src/app/shared/constants/url.constants';
+import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -16,7 +17,8 @@ export class LoginComponent {
     private fb: FormBuilder,
     private authApiClient : AdminApiAuthApiClient,
     private alertService: AlertService,
-    private router: Router
+    private router: Router,
+    private tonkenSerivce: TokenStorageService
     ) {
     this.loginForm = this.fb.group({
       userName: new FormControl('', Validators.required),
@@ -35,7 +37,11 @@ export class LoginComponent {
     this.authApiClient.login(request).subscribe({
       next:(res: AuthenticatedResult) => {
         //Save token and refresh token to localstorage
-        this.router.navigate(['/dashboard']);
+        this.tonkenSerivce.saveToken(res.token);
+        this.tonkenSerivce.saveRefreshToken(res.refreshToken);
+        this.tonkenSerivce.saveUser(res);
+        // redirect to dashboard
+        this.router.navigate([UrlConstants.HOME]);
       },
       error:(err: any) => {
         console.log(err);
